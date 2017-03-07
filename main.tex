@@ -1,0 +1,69 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{physics}
+\usepackage[margin=1.3in]{geometry}
+\usepackage{graphicx}
+\usepackage[english]{babel}
+\usepackage{mathabx}
+
+\usepackage{graphicx}
+\usepackage{caption, threeparttable}
+\captionsetup{labelfont = sc, textfont = it}
+\title{GREEN'S BEANS}
+\author{Nikolaos Palamidas}
+
+
+\begin{document}
+
+\maketitle
+
+
+\section{Green's Function approach}
+\subsection{What and why?}
+
+Green's functions are widely used in condensed matter physics, as they solve difficult and often analytically impossible differential equations by conventional means. Although their construction is a delicate process, once found for a many-body system, they reduce computational power significantly and are able to give results that just solving the original differential equation would not, as we shall see. They begin on the premise that you have some L differential operator acting on a (wave)function f(x), so $L*f(x)=g(x)$. In simplest terms, the Green's function is defined as the "inverse" of the differential operator L, such that 
+$$LG(x,y)=\delta (x-y)$$
+In this way we see that G(x,y) is a solution of the differential equation, if we integrate the G(x,y) in a particular way. Consider the solution u(x) to the equation $Lu(x)=f(x)$, which we can solve by integrating the Green's function along every point of f(x)
+
+$$u(x)=\int G(x,y)f(y)dy$$
+which is clear to see if we consider 
+$$Lu(x)=\int LG(x,y)f(y)dy=\int \delta(x-y)f(y)dy =f(x)$$
+
+where the last step is application of the filtering theorem of the Dirac-delta. In this way we see that the Green's function (or sometimes correlation function) is not quite a function, but more a distribution like the Dirac-delta function that describes it. It acts as an integration measure when acted on other functions.
+
+\subsection{KKR-LMTO}
+
+In physics, when we refer to the Green's function, we mean the Green's function of the Hamiltonian. In other words, the energy solutions to the Hamiltonian, are the poles of the Green's function, so that $(E-H)G=1$ where E is some complex energy. To relate to our definition earlier,
+$$[E+\Delta -V(r)]G(r,r';E)=\delta (r-r') $$
+Assuming an orthonormal basis of eigenfunctions that satisfy $H\ket{\psi_i}=\epsilon_i \ket{\psi_i}$ then we obtain that 
+$$G(E) = \sum_i \ket{\psi_i} \frac{1}{E-\epsilon_i} \bra{\psi_i}=\sum_i \frac{\psi \psi_i^*}{E-\epsilon_i}$$
+
+It is also clear to see that the residue of the simple pole is the product of wavefunctions.The standard way to extract information from Green's functions is to inspect their behaviour using complex analysis as they are complex functions. To do integration of G, we must consider a contour that avoids the simple pole, $E=\epsilon_i$, let us take $\epsilon_i \rightarrow \epsilon_i-i\eta$ where $\eta=0^+$, some positive infinitesimal.
+$$\psi(x,t)=\int dy G(x,t,y,t')\psi(y,t')$$
+In other words, the Green's function takes a wavefunction at some point in time and space, and evolves it to another point in time and space and is called the propagator for this reason. This is the reason for their importance in condensed matter physics as they provide a mathematical description of how electronic structure evolves in time through a system, which is especially important for magnetic multilayers. It also becomes especially important for perturbation theory when we want to disturb the unperturbed system with some perturbation (usually a potential) and measure its linear response. Consider $H=H^0+t$ where $H^0$ is the unperturbed or free Hamiltonian and t are scattering matrix elements that perturb the system. In this way we see that for the free greens function $G^0(E)=(E-H^0)^{-1}$ and the perturbed $G(E)=(E-H)^{-1}$. Then by simple multiplication, we obtain the Dyson equation as follows (where the complex E dependence has been dropped for brevity).
+
+$$G(E)=G^0+G^0tG=G^0+G^0tG+G^0tG^0tG^0+...$$
+Now we see that this yields in matrix form $G=(G^0-t)^{-1}$. It is clear to have stationary states and valid solutions of the system, they must be the poles of the green's function G(E). Of course these are obtained (since in matrix form), from the zeros of the determinant, such that
+$$det(t^{-1}-G^0)=|t^{-1}-G^0|=0$$
+
+This is the Korringa-Kohn-Rostoker (KKR) green's function method (also referred to as the multiple scattering theory). This method has proved very successful due to its separation of structure and scattering
+
+\subsection{LMTO}
+We now obtain that the Green's function in matrix form is
+
+$$ G(E) = - \frac{\ddot{P(E)}}{2\dot{P(E)}} + \dot{P(E)}^{1/2} (P(E)-S)^{-1} \dot{P(E)}^{1/2}$$
+For brevity, we define $G(E)= \lambda(E) +\mu(E)g(E)\mu(E)$ so that we have three new matrices defined as
+$$g(E)=\frac{1}{P(E)-S} \qquad \mu(E)= \dot{P(E)}^{1/2} \qquad \lambda(E)=- \frac{\ddot{P(E)}}{2\dot{P(E)}}$$
+
+Thus poles of G(E) and g(E) both yield solutions to the KKR-ASA secular equation. Ideally the full G(E) should be used to calculate quantities, but sometimes it is easier and less computationally intensive to use the g(z), which is referred to as the auxiliary Green's function (REFERENCE TUREK). 
+
+In the last chapter on LMTO, we obtained the orthogonal linearised Hamiltonian matrix H\textsuperscript{orth}. 
+\\\\\\\\\
+SHOW PROOF OR APPENDIX
+\\\\\\\\\
+
+$$G(E)= (E-H^{orth})^-^1$$
+
+
+
+\end{document}
